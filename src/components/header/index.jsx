@@ -8,7 +8,7 @@ import CartDetail from "../muvilist/cartDetails";
 import { MovieContext, ThemeContext } from "../../context";
 
 const Header = () => {
-  const { cartData } = useContext(MovieContext);
+  const { state } = useContext(MovieContext);
   const { darkMood, setDarkMood } = useContext(ThemeContext);
 
   const [showCart, setShowCart] = useState(false);
@@ -49,9 +49,9 @@ const Header = () => {
               onClick={handleCartShow}
             >
               <img src={Cart} width="24" height="24" alt="" />
-              {cartData?.length > 0 && (
+              {state.cartData?.length > 0 && (
                 <span className="rounded-full absolute top-[-12px] left-[28px] bg-[#12CF6F] text-white text-center p-[2px] w-[30px] h-[30px">
-                  {cartData?.length}
+                  {state.cartData?.length}
                 </span>
               )}
             </a>

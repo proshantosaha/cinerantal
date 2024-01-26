@@ -6,21 +6,34 @@ import Rating from "../rating/Rating";
 import MovieDeatilsModal from "../MovieDeatilsModal";
 import { MovieContext } from "../../../context";
 // import { MovieContext } from "../../../context";
+import { toast } from "react-toastify";
 
 const Card = ({ movie }) => {
   const [showModal, setShowModal] = useState(false);
   const [selectMovie, setSelectMovie] = useState(null);
-  const { cartData, setCartData } = useContext(MovieContext);
+  const { state, dispatch } = useContext(MovieContext);
 
   const handleAddToCart = (e, movie) => {
     e.stopPropagation();
     // setCartData(movie);
-    const found = cartData.find((item) => {
+    const found = state.cartData.find((item) => {
       return item.id === movie.id;
     });
     if (!found) {
-      setCartData([...cartData, movie]);
+      dispatch({
+        type: "ADD_TO_CART",
+        payload: {
+          ...movie,
+        },
+      });
+
+      toast.success(`Movie ${movie.title} added successfully`, {
+        position: toast.POSITION.BOTTOM_RIGHT,
+      });
     } else {
+      toast.error(`Movie ${movie.title} alrady added`, {
+        position: toast.POSITION.BOTTOM_RIGHT,
+      });
     }
   };
 
@@ -57,14 +70,14 @@ const Card = ({ movie }) => {
               <Rating value={movie.rating} />
             </div>
 
-            <a
+            <button
               className="bg-primary rounded-lg py-2 px-5 flex items-center justify-center gap-2 text-[#171923] font-semibold text-sm"
               href="#"
               onClick={(e) => handleAddToCart(e, movie)}
             >
               <img src="./assets/tag.svg" alt="" />
               <span>${movie.price}| Add to Cart</span>
-            </a>
+            </button>
           </figcaption>
         </a>
       </figure>
