@@ -1,0 +1,86 @@
+*tailwin config e kivabe fix color and container set kora lage
+
+
+
+* eta ekta function fake json er image k dynamicly korte ei function ta toiri 
+-------------------------------------------------------------------------
+
+function getImgUrl(name) {
+  return new URL(`../assets/movie-covers/${name}`, import.meta.url).href;
+}
+
+export { getImgUrl };
+
+
+
+* detail page
+--------------------
+ekti detail component toiri korci moviemodal name
+
+then card ekti state toiri coci  const [showModal,setShowModal] = useState(false) ei state er kaj holo modal dekhte pawa ebng bodho hoye jawa
+   const handleModalClose = () => {
+    setSelectMovie(null);
+    setShowModal(false);
+  };
+
+
+ei state er kaj holo  const [selectMovie, setSelectMovie] = useState(null); movie select kora 
+  const handleMovieSelection = (movie) => {
+    setSelectMovie(movie);
+    setShowModal(true);
+  };
+
+
+uporer kaj gula ses hole props dara data pabe details page
+-----------------------------------------------------------------------------
+
+
+
+cart deatils
+------------------
+*first addtocart click korle jno cartmodal show hoy seta korte hobe,kaj ta korte hobe jkhane carticon royeche,kajta korar jonne
+ekta state nilam
+  const [showCart, setShowCart] = useState(false);
+
+tarpor ternary oparetor madhome ekta condition diye cart ta show hide kora hoyeche,ekhane bydefault false(mane hide kora hoyeche)
+
+{showCart && <CartDetail />}
+
+
+tar por ekta onclik function bosalam cart icon
+ onClick={handleCartShow}
+
+click korle show hobe noy to hide thakbe
+  const handleCartShow = () => {
+    setShowCart(true);
+  };
+
+
+ekhn jate clicke hide hoye jay,sei jonne ekta onClose function declare korlam seta props akare carte er cancel butone pahtiy dilam
+      {showCart && <CartDetail onClose={()=>setShowCart(false)} />}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
